@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechShop Senegal - Informatique & High-Tech</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="home">
+  <header>
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-name">TechShop</span>
+        <span class="logo-sub">Senegal</span>
+      </a>
+      <nav>
+        <a href="index.html">Accueil</a>
+        <a href="about.html">A Propos</a>
+        <a href="categories.html">Categories</a>
+      </nav>
+      <div class="header-actions">
+        <button class="btn-search" id="btn-search-open">&#128269;</button>
+        <a href="login.html" class="btn-login">Se connecter</a>
+        <a href="register.html" class="btn-register">S'inscrire</a>
+        <button class="hamburger" id="hamburger">&#9776;</button>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="index.html">Accueil</a>
+      <a href="about.html">A Propos</a>
+      <a href="categories.html">Categories</a>
+      <div class="mobile-menu-btns">
+        <a href="login.html" style="border:1px solid #4b5563;color:#d1d5db">Se connecter</a>
+        <a href="register.html" style="background:#f59e0b;color:#000">S'inscrire</a>
+      </div>
+    </div>
+  </header>
+  <div class="search-overlay" id="search-overlay">
+    <div onclick="event.stopPropagation()">
+      <form class="search-box" id="search-form">
+        <input id="search-input" type="text" placeholder="Rechercher un produit...">
+        <button type="submit">&#128269;</button>
+      </form>
+      <p style="color:#9ca3af;font-size:.8rem;text-align:center;margin-top:10px">Cliquez en dehors pour fermer</p>
+    </div>
+  </div>
+  <main class="container">
+    <div id="main-content">Chargement...</div>
+  </main>
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <span class="footer-logo-name">TechShop</span><br>
+        <span class="footer-logo-sub">Senegal</span>
+        <p class="footer-slogan">Votre boutique informatique de confiance au Senegal.<br>Materiel authentique, prix competitifs, service exceptionnel.</p>
+      </div>
+      <div>
+        <h4>Informations</h4>
+        <ul>
+          <li><span class="dot">&#8226;</span><a href="index.html">Accueil</a></li>
+          <li><span class="dot">&#8226;</span><a href="about.html">A propos</a></li>
+          <li><span class="dot">&#8226;</span><a href="categories.html">Categories</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <div class="footer-contact-item"><span class="icon-map">&#128205;</span><span>Plateau, Avenue Leopold Sedar Senghor,<br>Dakar, Senegal</span></div>
+        <div class="footer-contact-item"><span class="icon-phone">&#128222;</span><span>+221 33 800 00 00</span></div>
+        <div class="footer-contact-item"><span>&#9993;</span><span>contact@techshop.sn</span></div>
+      </div>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
