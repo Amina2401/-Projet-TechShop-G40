@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Categories - TechShop Senegal</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* === BOUTON AJOUTER === */
+    .page-topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+    .btn-add-product {
+      display: flex; align-items: center; gap: 8px;
+      background: #f59e0b; color: #000; border: none; border-radius: 8px;
+      padding: 10px 20px; font-size: .85rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .05em; cursor: pointer;
+      box-shadow: 0 4px 14px rgba(245,158,11,.4); transition: opacity .2s; text-decoration: none;
+    }
+    .btn-add-product:hover { opacity: .9; }
+
+    /* === MODALE === */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,.6); align-items: center; justify-content: center; padding: 16px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-box { background: #fff; border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,.25); width: 100%; max-width: 440px; overflow: hidden; }
+    .modal-header { background: #1a1f2e; padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; }
+    .modal-header h3 { color: #fff; font-size: 1rem; }
+    .modal-close { background: none; border: none; color: #9ca3af; font-size: 1.2rem; cursor: pointer; line-height: 1; }
+    .modal-body { padding: 28px 24px; }
+    .modal-body p { color: #6b7280; line-height: 1.7; margin-bottom: 24px; font-size: .88rem; }
+    .modal-btns { display: flex; flex-direction: column; gap: 12px; }
+    .modal-btn-login { display: flex; align-items: center; justify-content: center; gap: 8px; background: #1a1f2e; color: #fff; border: none; border-radius: 8px; padding: 13px; font-size: .9rem; font-weight: 700; cursor: pointer; text-decoration: none; text-transform: uppercase; letter-spacing: .05em; transition: opacity .2s; }
+    .modal-btn-register { display: flex; align-items: center; justify-content: center; gap: 8px; background: #f59e0b; color: #000; border: none; border-radius: 8px; padding: 13px; font-size: .9rem; font-weight: 700; cursor: pointer; text-decoration: none; text-transform: uppercase; letter-spacing: .05em; transition: opacity .2s; }
+    .modal-btn-login:hover, .modal-btn-register:hover { opacity: .9; }
+    .modal-btn-demo { background: none; border: 1.5px dashed #d1d5db; border-radius: 8px; padding: 10px; color: #9ca3af; font-size: .8rem; cursor: pointer; transition: all .2s; }
+    .modal-btn-demo:hover { border-color: #f59e0b; color: #d97706; }
+    .modal-icon { font-size: 2rem; text-align: center; margin-bottom: 16px; }
+  </style>
+</head>
+<body data-page="categories">
+
+  <header>
+    <div class="header-inner">
+      <a href="index.html" class="logo"><span class="logo-name">TechShop</span><span class="logo-sub">Senegal</span></a>
+      <nav>
+        <a href="index.html">Accueil</a>
+        <a href="about.html">A Propos</a>
+        <a href="categories.html">Categories</a>
+      </nav>
+      <div class="header-actions">
+        <button class="btn-search" id="btn-search-open">&#128269;</button>
+        <a href="login.html" class="btn-login">Se connecter</a>
+        <a href="register.html" class="btn-register">S'inscrire</a>
+        <button class="hamburger" id="hamburger">&#9776;</button>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="index.html">Accueil</a>
+      <a href="about.html">A Propos</a>
+      <a href="categories.html">Categories</a>
+      <div class="mobile-menu-btns">
+        <a href="login.html" style="border:1px solid #4b5563;color:#d1d5db">Se connecter</a>
+        <a href="register.html" style="background:#f59e0b;color:#000">S'inscrire</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="search-overlay" id="search-overlay">
+    <div onclick="event.stopPropagation()">
+      <form class="search-box" id="search-form">
+        <input id="search-input" type="text" placeholder="Rechercher un produit...">
+        <button type="submit">&#128269;</button>
+      </form>
+    </div>
+  </div>
+
+  <main class="container">
+
+    <!-- Barre du haut avec bouton Ajouter -->
+    <div class="page-topbar">
+      <h1 style="color:#1a1f2e;font-size:1.2rem;text-transform:uppercase;letter-spacing:.05em">Nos Categories</h1>
+      <button class="btn-add-product" onclick="checkAuthAndAdd()">
+        &#43; Ajouter un produit
+      </button>
+    </div>
+
+    <div class="categories-layout">
+      <aside class="sidebar">
+        <div class="sidebar-header"><h2>Categories de produits</h2></div>
+        <ul class="sidebar-list" id="sidebar-list"></ul>
+      </aside>
+      <div class="cat-products-grid" id="cat-grid"></div>
+    </div>
+  </main>
+
+  <!-- MODALE AUTHENTIFICATION -->
+  <div class="modal-overlay" id="authModal" onclick="closeAuthModal(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3>&#128274; Acces requis</h3>
+        <button class="modal-close" onclick="closeModal('authModal')">&#215;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-icon">&#128187;</div>
+        <p>Pour ajouter un produit sur TechShop, vous devez etre connecte a votre compte. Connectez-vous ou creez un compte gratuitement pour commencer a publier.</p>
+        <div class="modal-btns">
+          <a href="login.php?redirect=add-product.php" class="modal-btn-login">
+            &#128274; Se connecter
+          </a>
+          <a href="register.php" class="modal-btn-register">
+            &#43; Creer un compte
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <span class="footer-logo-name">TechShop</span><br>
+        <span class="footer-logo-sub">Senegal</span>
+        <p class="footer-slogan">Votre boutique informatique de confiance au Senegal.</p>
+      </div>
+      <div>
+        <h4>Informations</h4>
+        <ul>
+          <li><span class="dot">&#8226;</span><a href="index.html">Accueil</a></li>
+          <li><span class="dot">&#8226;</span><a href="about.html">A propos</a></li>
+          <li><span class="dot">&#8226;</span><a href="categories.html">Categories</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <div class="footer-contact-item"><span class="icon-map">&#128205;</span><span>Plateau, Avenue Leopold Sedar Senghor, Dakar, Senegal</span></div>
+        <div class="footer-contact-item"><span class="icon-phone">&#128222;</span><span>+221 33 800 00 00</span></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Verification session (cookie simple pour la demo)
+    function isLoggedIn() {
+      return document.cookie.indexOf('techshop_logged=1') >= 0 || sessionStorage.getItem('techshop_auth') === 'true';
+    }
+
+    function checkAuthAndAdd() {
+      if (isLoggedIn()) {
+        window.location.href = 'add-product.php';
+      } else {
+        document.getElementById('authModal').classList.add('open');
+      }
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('open');
+    }
+
+    function closeAuthModal(e) {
+      if (e.target === document.getElementById('authModal')) closeModal('authModal');
+    }
+
+    function goAddProductDemo() {
+      sessionStorage.setItem('techshop_auth', 'true');
+      window.location.href = 'add-product.php';
+    }
+
+    // Fermer avec Echap
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeModal('authModal');
+        var overlay = document.getElementById('search-overlay');
+        if (overlay) overlay.classList.remove('open');
+      }
+    });
+  </script>
+</body>
+</html>
