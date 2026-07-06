@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription - TechShop Senegal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div class="header-inner">
+            <a href="index.html" class="logo">
+                <span class="logo-name">TechShop</span>
+                <span class="logo-sub">Senegal</span>
+            </a>
+            <nav>
+                <a href="index.html">Accueil</a>
+                <a href="about.html">A Propos</a>
+                <a href="categories.html">Categories</a>
+            </nav>
+            <div class="header-actions">
+                <a href="login.html" class="btn-login">Se connecter</a>
+                <a href="register.html" class="btn-register">S'inscrire</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="auth-page">
+        <div class="auth-card">
+            <div class="auth-logo">
+                <a href="index.html">
+                    <span class="name">TechShop</span><br>
+                    <span class="sub">Senegal</span>
+                </a>
+            </div>
+            <h2>Creer un compte</h2>
+            <p class="auth-subtitle">Rejoignez la communaute TechShop</p>
+
+            <form action="register.php" method="POST">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Nom</label>
+                        <div class="input-wrap">
+                            <span class="icon">&#128100;</span>
+                            <input type="text" name="nom" placeholder="Diallo" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Prenom</label>
+                        <div class="input-wrap">
+                            <span class="icon">&#128100;</span>
+                            <input type="text" name="prenom" placeholder="Amadou" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Adresse email</label>
+                    <div class="input-wrap">
+                        <span class="icon">&#9993;</span>
+                        <input type="email" name="email" placeholder="exemple@email.com" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Telephone</label>
+                    <div class="input-wrap">
+                        <span class="icon">&#128222;</span>
+                        <input type="tel" name="telephone" placeholder="+221 77 000 00 00">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Mot de passe</label>
+                    <div class="input-wrap">
+                        <span class="icon">&#128274;</span>
+                        <input type="password" id="pw" name="password"
+                            placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;" required>
+                        <button type="button" class="toggle-pw" onclick="togglePw('pw', this)">&#128065;</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Confirmer le mot de passe</label>
+                    <div class="input-wrap">
+                        <span class="icon">&#128274;</span>
+                        <input type="password" id="pw2" name="confirm"
+                            placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;" required>
+                    </div>
+                </div>
+                <label class="checkbox-label">
+                    <input type="checkbox" required>
+                    J'accepte les <a href="#">conditions d'utilisation</a> et la <a href="#">politique de
+                        confidentialite</a>
+                </label>
+                <button type="submit" class="btn-submit gold">Creer mon compte</button>
+                <p class="auth-switch">Deja un compte ? <a href="login.html">Se connecter</a></p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function togglePw(id, btn) {
+            var input = document.getElementById(id);
+            input.type = input.type === 'password' ? 'text' : 'password';
+        }
+    </script>
+</body>
+
+</html>
