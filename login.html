@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connexion - TechShop Senegal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-name">TechShop</span>
+        <span class="logo-sub">Senegal</span>
+      </a>
+      <nav>
+        <a href="index.html">Accueil</a>
+        <a href="about.html">A Propos</a>
+        <a href="categories.html">Categories</a>
+      </nav>
+      <div class="header-actions">
+        <a href="login.html" class="btn-login">Se connecter</a>
+        <a href="register.html" class="btn-register">S'inscrire</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="auth-page">
+    <div class="auth-card">
+      <div class="auth-logo">
+        <a href="index.html">
+          <span class="name">TechShop</span><br>
+          <span class="sub">Senegal</span>
+        </a>
+      </div>
+      <h2>Connexion</h2>
+      <p class="auth-subtitle">Accedez a votre compte TechShop</p>
+
+      <form action="login.php" method="POST">
+        <div class="form-group">
+          <label for="email">Adresse email</label>
+          <div class="input-wrap">
+            <span class="icon">&#9993;</span>
+            <input type="email" id="email" name="email" placeholder="exemple@email.com" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password">Mot de passe</label>
+          <div class="input-wrap">
+            <span class="icon">&#128274;</span>
+            <input type="password" id="password" name="password" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;" required>
+            <button type="button" class="toggle-pw" onclick="togglePw('password', this)">&#128065;</button>
+          </div>
+        </div>
+        <button type="submit" class="btn-submit dark">Se connecter</button>
+        <div class="divider"><span>ou</span></div>
+        <p class="auth-switch">Pas encore de compte ? <a href="register.html">S'inscrire</a></p>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    function togglePw(id, btn) {
+      var input = document.getElementById(id);
+      input.type = input.type === 'password' ? 'text' : 'password';
+      btn.textContent = input.type === 'password' ? '&#128065;' : '&#128683;';
+    }
+  </script>
+</body>
+</html>
